@@ -2,30 +2,27 @@ package com.rgonzalez.test.web.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.rgonzalez.test.web.app.dao.IRepository;
-import com.rgonzalez.test.web.app.models.Brand;
-import com.rgonzalez.test.web.app.models.Model;
-
-
+import com.rgonzalez.test.web.app.models.entity.Brand;
+import com.rgonzalez.test.web.app.models.entity.Model;
+import com.rgonzalez.test.web.app.models.services.IService;
 
 @Controller
 public class ModelController {
 
 	@Autowired
-	private IRepository<Brand> brandRepository;
+	private IService<Brand> brandService;
 	
 	@Autowired
-	private IRepository<Model> modelRepository;
+	private IService<Model> modelService;
 	
 	@GetMapping(value="model/list")
 	public String list(org.springframework.ui.Model model)
 	{
 		model.addAttribute("title","Brands and Models");
-		model.addAttribute("brands",brandRepository.getAll());
-		model.addAttribute("models",modelRepository.getAll());
+		model.addAttribute("brands",brandService.getAll());
+		model.addAttribute("models",modelService.getAll());
 		return "model/list";
 	}
 	

@@ -1,4 +1,4 @@
-package com.rgonzalez.test.web.app.models;
+package com.rgonzalez.test.web.app.models.entity;
 
 import java.io.Serializable;
 

@@ -10,40 +10,40 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rgonzalez.test.web.app.dao.IRepository;
-import com.rgonzalez.test.web.app.models.Brand;
-import com.rgonzalez.test.web.app.models.Car;
-import com.rgonzalez.test.web.app.models.Model;
+import com.rgonzalez.test.web.app.models.entity.Brand;
+import com.rgonzalez.test.web.app.models.entity.Car;
+import com.rgonzalez.test.web.app.models.entity.Model;
 
+import com.rgonzalez.test.web.app.models.services.IService;
 import com.google.gson.Gson;   
 
 @Controller
 public class CarController {
 
 	@Autowired
-	private IRepository<Car> carRepository;
+	private IService<Car> carService;
 	
 	@Autowired
-	private IRepository<Brand> brandRepository;
+	private IService<Brand> brandService;
 	
 	@Autowired
-	private IRepository<Model> modelRepository;
+	private IService<Model> modelService;
 	
 
 	@ModelAttribute("models")
 	public List<Model> models(){
-		return modelRepository.getAll();
+		return modelService.getAll();
 	}
 	
 	@ModelAttribute("brands")
 	public List<Brand> brands(){
-		return brandRepository.getAll();
+		return brandService.getAll();
 	}
 
 	@GetMapping(value = "/car/list")
 	public String List(org.springframework.ui.Model model) {
 		model.addAttribute("title", "List cars");
-		model.addAttribute("cars", carRepository.getAll());
+		model.addAttribute("cars", carService.getAll());
 		return "car/list";
 	}
 	
@@ -60,7 +60,7 @@ public class CarController {
 		Car car = null;
 		
 		if (id>0){
-			car = carRepository.getbyId(id);
+			car = carService.getbyId(id);
 		}else {
 			return "redirect:/car/list";
 		}
@@ -72,7 +72,7 @@ public class CarController {
 	
 	@PostMapping(value="/car/save")
 	public String save(Car car) {
-		carRepository.save(car);
+		carService.save(car);
 		return "redirect:car/list";
 	}
 	
@@ -80,7 +80,7 @@ public class CarController {
 //	@GetMapping(value="loadModels/{id}")
 //	public String loadModels(@PathVariable(value="id")Integer id,org.springframework.ui.Model model){
 //		Gson gson = new Gson();
-//		return gson.toJson(brandRepository.getbyId(id).getModels());
+//		return gson.toJson(brandService.getbyId(id).getModels());
 //	}
 	
 }

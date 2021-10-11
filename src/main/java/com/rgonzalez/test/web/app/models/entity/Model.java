@@ -1,39 +1,30 @@
-package com.rgonzalez.test.web.app.models;
+package com.rgonzalez.test.web.app.models.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Entity(name = "brands")
-public class Brand implements Serializable {
+
+@Entity(name = "models")
+public class Model implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5006993565582966415L;
-	
+	private static final long serialVersionUID = 7421633883167661671L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne
+	@JoinColumn(name="brand_id")
+	private Brand brand;
 	private String descrip;
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "brand")
-	private List<Model> models;
-
-	public List<Model> getModels() {
-		return models;
-	}
-
-	public void setModels(List<Model> models) {
-		this.models = models;
-	}
 
 	public Integer getId() {
 		return id;
@@ -41,6 +32,14 @@ public class Brand implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 
 	public String getDescrip() {

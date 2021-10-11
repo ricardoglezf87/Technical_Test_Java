@@ -1,4 +1,4 @@
-package com.rgonzalez.test.web.app.dao;
+package com.rgonzalez.test.web.app.models.dao;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.rgonzalez.test.web.app.models.Brand;
+import com.rgonzalez.test.web.app.models.entity.Model;
 
 @Repository
-public class BrandRepository implements IRepository<Brand>{
+public class ModelRepository implements IRepository<Model>{
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -19,19 +19,19 @@ public class BrandRepository implements IRepository<Brand>{
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	@Override
-	public List<Brand> getAll() { 
-		return em.createQuery("from brands").getResultList();
+	public List<Model> getAll() { 
+		return em.createQuery("from models").getResultList();
 	}
 
 	@Transactional(readOnly=true)
 	@Override
-	public Brand getbyId(Integer id) {		
-		return em.find(Brand.class, id);
+	public Model getbyId(Integer id) {		
+		return em.find(Model.class, id);
 	}
 
 	@Transactional
 	@Override
-	public void save(Brand obj) {
+	public void save(Model obj) {
 		if (obj.getId()!= null && obj.getId()>0)
 			em.merge(obj);
 		else
@@ -40,7 +40,7 @@ public class BrandRepository implements IRepository<Brand>{
 
 	@Transactional
 	@Override
-	public void delete(Brand obj) {
+	public void delete(Model obj) {
 		em.remove(obj);		
 	}
 

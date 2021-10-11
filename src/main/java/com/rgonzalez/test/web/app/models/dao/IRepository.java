@@ -1,4 +1,4 @@
-package com.rgonzalez.test.web.app.dao;
+package com.rgonzalez.test.web.app.models.dao;
 import java.util.List;
 
 public interface IRepository<T> {

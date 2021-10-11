@@ -1,4 +1,4 @@
-package com.rgonzalez.test.web.app.dao;
+package com.rgonzalez.test.web.app.models.dao;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.rgonzalez.test.web.app.models.Model;
+import com.rgonzalez.test.web.app.models.entity.Car;
 
 @Repository
-public class ModelRepository implements IRepository<Model>{
+public class CarRepository implements IRepository<Car>{
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -19,19 +19,19 @@ public class ModelRepository implements IRepository<Model>{
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	@Override
-	public List<Model> getAll() { 
-		return em.createQuery("from models").getResultList();
+	public List<Car> getAll() { 
+		return em.createQuery("from cars").getResultList();
 	}
 
 	@Transactional(readOnly=true)
 	@Override
-	public Model getbyId(Integer id) {		
-		return em.find(Model.class, id);
+	public Car getbyId(Integer id) {		
+		return em.find(Car.class, id);
 	}
 
 	@Transactional
 	@Override
-	public void save(Model obj) {
+	public void save(Car obj) {
 		if (obj.getId()!= null && obj.getId()>0)
 			em.merge(obj);
 		else
@@ -40,8 +40,8 @@ public class ModelRepository implements IRepository<Model>{
 
 	@Transactional
 	@Override
-	public void delete(Model obj) {
-		em.remove(obj);		
+	public void delete(Car car) {
+		em.remove(car);		
 	}
 
 	@Transactional
