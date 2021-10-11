@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+<head th:replace="Layout/layout :: head"></head>
+<body>
+	<div class="container">
+
+		<header th:replace="Layout/layout :: siteHeader"></header>
+
+		<h1>My collection cars</h1>
+		<hr />
+
+		<section class="content">
+			<a th:href="@{/car/add}" class="btn btn-info mar-bot-15">Add a
+				car</a>
+			<div class="row">
+
+				<div class="col-sm-4 col-md-4 col-lg-4 pad-bot-15"
+					th:each="car: ${cars}">
+					<div class="card card-body bg-light">
+
+						<h2 class="text-warning" th:text="${car.numberplate}"></h2>
+						<ul>
+							<li th:text="${car.model.brand.descrip}"></li>
+							<li th:text="${car.model.descrip}"></li>
+						</ul>
+						<p>
+						<h4 th:text="${car.price}"></h4>
+
+
+						<div class="align-items-center">
+							<a th:href="@{/car/update/}+${car.id}" class="btn btn-primary m1">Modify</a>
+							<a th:href="@{/car/delete/}+${car.id}" class="btn btn-danger m1">Delete</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="Layout/layout :: siteFooter"></footer>
+
+</body>
+</html>

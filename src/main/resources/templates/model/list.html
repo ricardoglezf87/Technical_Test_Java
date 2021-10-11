@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+<head th:replace="Layout/layout :: head"></head>
+<body>
+	<div class="container">
+
+		<header th:replace="Layout/layout :: siteHeader"></header>
+
+		<h1>Brands and Models</h1>
+		<hr />
+
+		<section class="content">
+			<div id="accordion">
+				<div class="card" th:each="brand : ${brands}">
+					<div class="card-header" id="headingOne">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse"
+								th:data-target="'#collapse_'+${brand.id}" aria-expanded="true"
+								th:aria-controls="'collapse_'+${brand.id}"
+								th:text="${brand.descrip}"></button>
+						</h5>
+					</div>
+					<div th:id="'collapse_'+${brand.id}" class="collapse"
+						th:aria-labelledby="'heading_'+${brand.id}"
+						data-parent="#accordion">
+						<div class="card-body">
+							<div class="card card-body" th:each="model : ${brand.models}"
+								th:text="${model.descrip}"></div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="Layout/layout :: siteFooter"></footer>
+
+</body>
+</html>
