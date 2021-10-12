@@ -10,62 +10,68 @@
 		<hr />
 
 		<section class="content jumbotron">
-    <form th:action="@{/car/save}" th:object="${car}" method="post" >
-    
-        <div class="form-group">
-            <label for = "numberPlate">Number plate</label>
-            <input type="text" th:field="*{numberplate}" class = "form-control" placeholder = "Write number plate"/>            
-        </div>
+			<form th:action="@{/car/save}" th:object="${car}" method="post">
 
-        <div class="form-group">
-        	<label for = "brand">Brand</label>         	         
-			<select id="brand" class = "form-control" th:field="*{model.brand}">
-				<option value="">-- Select a brand --</option>
-				<option th:each="brand : ${brands}" th:text="${brand.descrip}" value="${brand.id}"></option>
-			</select>
-        </div>
+				<div class="form-group">
+					<label for="numberPlate">Number plate</label> 
+					<input type="text"	th:field="*{numberplate}" class="form-control"
+						placeholder="Write number plate" />
+				</div>
 
-        <div class="form-group">
-			<label for = "model">Model</label>         	         
-			<select id="model" class = "form-control" th:field="*{model}">
-				<option value="">-- Select a brand --</option>
-				<option th:each="model : ${models}" th:text="${model.descrip}" value="${model.id}"></option>
-			</select>
-        </div>
+				<div class="form-group">
+					<label for="brand">Brand</label> 
+					<select id="brand" class="form-control" th:field="*{model.brand.id}">
+						<option value="">-- Select a brand --</option>
+						<option th:each="brand : ${brands}" th:text="${brand.descrip}"
+							th:value="${brand.id}"></option>
+					</select>
+				</div>
 
-        <div class="form-group">
-        	<label for = "price">Price</label>     
-        	<input type="number" th:field="*{price}" class = "form-control numeric", placeholder = "Write the price, be careful with comma and dot for decimal, depend of system"/>                     
-        </div>
+				<div class="form-group">
+					<label for="model">Model</label> 
+					<select id="model" class="form-control" th:field="*{model}">
+						<option value="">-- Select a model --</option>
+						<option th:each="model : ${models}" th:text="${model.descrip}"
+							th:value="${model.id}"></option>
+					</select>
+				</div>
 
-        <input type="submit" class="btn btn-primary" value="Add" />
-    </form>
-</section>
+				<div class="form-group">
+					<label for="price">Price</label> <input type="number"
+						th:field="*{price}" class="form-control numeric"
+						, placeholder="Write the price, be careful with comma and dot for decimal, depend of system" />
+				</div>
 
- <script type="text/javascript">
-    $(document).ready(function () {
+				<input type="submit" class="btn btn-primary" value="Add" />
+			</form>
+		</section>
 
-        $("#cbBrand").change(function () {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("LoadModelsByIdBrand")',
-                dataType: "json",
-                data: { brand_id: $("#cbBrand").val() },
-                success: function (models) {
-                    $("#cbModel").empty();
-                    $.each(models, function (i, model) {
-                        $("#cbModel").append('<option value="' + model.value + '">' +
-                            model.text + '</option>');
-                    });
-                },
-                error: function (ex) {
-                    alert('Failed to retrieve models.' + ex);
-                }
-            });
-            return false;
-        })
-    });
-</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#brand").change(function() {					
+					$.ajax({
+							type : 'GET',
+							url : '/car/loadmodels/' + $("#brand").val(),
+							success : function(result) {								
+								$("#model").empty();
+								$("#model").append('<option value="">-- Select a model --</option>');
+								var result = JSON.parse(result);
+								$.each(result,function(i,model) {
+									$("#model").append('<option value="' + model.id + '">'
+																			+ model.descrip
+																			+ '</option>');
+									});
+							},
+							error : function(
+									ex) {
+								alert('Failed to retrieve models.'
+										+ ex);
+							}
+						});
+				return false;
+			})
+		});
+		</script>
 	</div>
 	<footer th:replace="Layout/layout :: siteFooter"></footer>
 
