@@ -1,4 +1,4 @@
-package com.rgonzalez.Test.web.app;
+package com.rgonzalez.test.web.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title th:text="${title}"></title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/site.css}" />
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+
+	<header th:fragment="siteHeader"> 
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 main-nav">
+	           <div class="container">
+	               <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TechnicalTest</a>
+	               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+	                       aria-expanded="false" aria-label="Toggle navigation">
+	                   <span class="navbar-toggler-icon"></span>
+	               </button>
+	               <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+	                   <ul class="navbar-nav flex-grow-0">
+	                       <li class="nav-item"><a th:href="@{/home}" class = "nav-link text-dark">Home</a> </li>                        
+	                       <li class="nav-item"><a th:href="@{/car/list}" class = "nav-link text-dark">My collection</a> </li>
+	                       <li class="nav-item"><a th:href="@{/model/list}" class = "nav-link text-dark" >Brands and Models</a> </li>
+	                   </ul>
+	               </div>
+	               <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+	                   <partial name="_LoginPartial" />
+	               </div>
+	           </div>
+	       </nav>
+	</header>
+
+	<footer th:fragment="siteFooter" class="border-top footer text-muted">
+		<div class="container">
+            &copy; 2021 - TechnicalTest - <a th:href="@{/privacy}">Privacy</a>
+        </div>
+	</footer>
+
+</body>
+</html>
