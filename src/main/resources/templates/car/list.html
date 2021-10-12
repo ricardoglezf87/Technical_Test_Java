@@ -10,7 +10,7 @@
 		<hr />
 
 		<section class="content">
-			<a th:href="@{/car/add}" class="btn btn-info mar-bot-15">Add a
+			<a th:href="@{/car/form}" class="btn btn-info mar-bot-15">Add a
 				car</a>
 			<div class="row">
 
@@ -28,8 +28,8 @@
 
 
 						<div class="align-items-center">
-							<a th:href="@{/car/update/}+${car.id}" class="btn btn-primary m1">Modify</a>
-							<a th:href="@{/car/delete/}+${car.id}" class="btn btn-danger m1">Delete</a>
+							<a th:href="@{/car/form/}+${car.id}" class="btn btn-primary m1">Modify</a>
+							<a th:href="@{/car/delete/}+${car.id}" class="btn btn-danger m1" onclick="return confirm('Are you sure of delete this car?')">Delete</a>
 						</div>
 
 					</div>

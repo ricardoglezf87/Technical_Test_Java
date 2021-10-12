@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.rgonzalez.test.web.app.editors.BrandPropertyEditor;
 import com.rgonzalez.test.web.app.editors.ModelPropertyEditor;
@@ -23,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;   
 
 @Controller
+@SessionAttributes("car")
 public class CarController {
 
 	@Autowired
@@ -63,16 +66,16 @@ public class CarController {
 		return "car/list";
 	}
 	
-	@GetMapping(value="/car/add")
+	@GetMapping(value="/car/form")
 	public String add(org.springframework.ui.Model model){
 		model.addAttribute("title","Add new car");
 		model.addAttribute("car",new Car());
-		return "car/add";
+		return "car/form";
 	}
 
-	@GetMapping(value ="/car/edit/{id}")
+	@GetMapping(value ="/car/form/{id}")
 	public String edit(@PathVariable(value="id")Integer id,org.springframework.ui.Model model) {
-		
+		model.addAttribute("title","Edit car");
 		Car car = null;
 		
 		if (id>0){
@@ -83,12 +86,13 @@ public class CarController {
 		
 		model.addAttribute("car",car);
 		
-		return "car/edit";
+		return "car/form";
 	}
 	
 	@PostMapping(value="/car/save")
-	public String save(Car car) {
+	public String save(Car car,SessionStatus status) {
 		carService.save(car);
+		status.setComplete();
 		return "redirect:/car/list";
 	}
 	
@@ -99,5 +103,11 @@ public class CarController {
 		return gson.toJson(brandService.getbyId(id).getModels());
 	}
 	
+	@GetMapping(value="/car/delete/{id}")
+	public String delete(@PathVariable(value="id")Integer id)
+	{
+		carService.deletebyId(id);
+		return "redirect:/car/list";
+	}
 }
 

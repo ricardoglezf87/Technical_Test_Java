@@ -6,12 +6,14 @@
 
 		<header th:replace="Layout/layout :: siteHeader"></header>
 
-		<h1>Add new car</h1>
+		<h1 th:text="${title}"></h1>
 		<hr />
 
 		<section class="content jumbotron">
 			<form th:action="@{/car/save}" th:object="${car}" method="post">
-
+				
+				<input type="hidden" th:field="*{id}">
+				
 				<div class="form-group">
 					<label for="numberPlate">Number plate</label> 
 					<input type="text"	th:field="*{numberplate}" class="form-control"
@@ -42,7 +44,9 @@
 						, placeholder="Write the price, be careful with comma and dot for decimal, depend of system" />
 				</div>
 
-				<input type="submit" class="btn btn-primary" value="Add" />
+				<input th:if="*{id}" type="submit" class="btn btn-primary" value="Modify" />
+				<input th:if="*{id == null} " type="submit" class="btn btn-primary" value="Add" />
+				
 			</form>
 		</section>
 
