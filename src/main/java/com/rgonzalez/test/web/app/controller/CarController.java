@@ -16,11 +16,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.rgonzalez.test.web.app.editors.BrandPropertyEditor;
 import com.rgonzalez.test.web.app.editors.ModelPropertyEditor;
-import com.rgonzalez.test.web.app.models.entity.Brand;
-import com.rgonzalez.test.web.app.models.entity.Car;
-import com.rgonzalez.test.web.app.models.entity.Model;
+import com.rgonzalez.test.web.app.models.entity.*;
 import com.rgonzalez.test.web.app.models.entity.serializers.ModelSerializer;
-import com.rgonzalez.test.web.app.models.services.IService;
+import com.rgonzalez.test.web.app.models.services.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;   
 
@@ -29,13 +27,13 @@ import com.google.gson.GsonBuilder;
 public class CarController {
 
 	@Autowired
-	private IService<Car> carService;
+	private CarService carService;
 	
 	@Autowired
-	private IService<Brand> brandService;
+	private BrandService brandService;
 	
 	@Autowired
-	private IService<Model> modelService;
+	private ModelService modelService;
 	
 	@Autowired
 	private BrandPropertyEditor brandpropertyeditor;
@@ -60,22 +58,19 @@ public class CarController {
 	}
 
 	@GetMapping(value = "/car/list")
-	public String List(org.springframework.ui.Model model) {
-		model.addAttribute("title", "List cars");
+	public String List(org.springframework.ui.Model model) {		
 		model.addAttribute("cars", carService.getAll());
 		return "car/list";
 	}
 	
 	@GetMapping(value="/car/form")
-	public String add(org.springframework.ui.Model model){
-		model.addAttribute("title","Add new car");
+	public String add(org.springframework.ui.Model model){		
 		model.addAttribute("car",new Car());
 		return "car/form";
 	}
 
 	@GetMapping(value ="/car/form/{id}")
-	public String edit(@PathVariable(value="id")Integer id,org.springframework.ui.Model model) {
-		model.addAttribute("title","Edit car");
+	public String edit(@PathVariable(value="id")Integer id,org.springframework.ui.Model model) {		
 		Car car = null;
 		
 		if (id>0){
@@ -84,8 +79,7 @@ public class CarController {
 			return "redirect:/car/list";
 		}
 		
-		model.addAttribute("car",car);
-		
+		model.addAttribute("car",car);		
 		return "car/form";
 	}
 	

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmls:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1">
-	<title th:text="${title}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Technical Test</title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 	<link rel="stylesheet" th:href="@{/css/site.css}" />
 	<script th:src="@{/js/jquery.min.js}"></script>
@@ -20,9 +20,9 @@
 	               </button>
 	               <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 	                   <ul class="navbar-nav flex-grow-0">
-	                       <li class="nav-item"><a th:href="@{/home}" class = "nav-link text-dark">Home</a> </li>                        
-	                       <li class="nav-item"><a th:href="@{/car/list}" class = "nav-link text-dark">My collection</a> </li>
-	                       <li class="nav-item"><a th:href="@{/model/list}" class = "nav-link text-dark" >Brands and Models</a> </li>
+	                       <li class="nav-item"><a th:href="@{/home}" class = "nav-link text-dark" th:text="#{home.title}"></a> </li>                        
+	                       <li class="nav-item"><a th:href="@{/car/list}" class = "nav-link text-dark" th:text="#{collection.title}"></a> </li>
+	                       <li class="nav-item"><a th:href="@{/model/list}" class = "nav-link text-dark" th:text="#{brand.and.models.title}"></a> </li>
 	                   </ul>
 	               </div>
 	               <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
@@ -34,6 +34,7 @@
 
 	<footer th:fragment="siteFooter" class="border-top footer text-muted">
 		<div class="container">
+			<a th:href="@{/(lang=es)}">ES</a>| <a th:href="@{/(lang=en)}">EN</a>
             &copy; 2021 - TechnicalTest - <a th:href="@{/privacy}">Privacy</a>
         </div>
 	</footer>
