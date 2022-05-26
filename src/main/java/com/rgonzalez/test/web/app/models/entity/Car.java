@@ -26,6 +26,8 @@ public class Car implements Serializable {
 	@JoinColumn(name="model_id")
 	private Model model;
 	private String numberplate;
+	
+	
 	private Double price;
 	
 	@Override
