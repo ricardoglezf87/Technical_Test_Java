@@ -8,29 +8,28 @@
 		<header th:replace="Layout/layout :: siteHeader"></header>
 		<section class="content">
 			<div class="jumbotron">
-				<h1>Home: Add your cars</h1>
-				<p class="lead">Add your cars!, You can have the control about
-					all of them</p>
+				<h1 th:text="#{home.car.title}"></h1>
+				<p class="lead" th:text="#{home.car.details}"></p>
 				<p>
-					<a class="btn btn-primary btn-lg" th:href="@{/car/form}">newCar</a>
+					<a class="btn btn-primary btn-lg" th:href="@{/car/form}" th:text="#{home.car.button}"></a>
 				</p>
 			</div>
 
 			<div class="row">
 				<div class="col-md-6 align-content-center">
 					<img th:src="@{/images/Colection.jpg}" class="img-fluid" />
-					<h2>My cars</h2>
-					<p>Get the list of my collection cars</p>
+					<h2 th:text="#{home.my.cars.title}"></h2>
+					<p th:text="#{home.my.cars.details}"></p>
 					<p>
-						<a class="btn btn-primary btn-lg" th:href="@{/car/list}">More</a>
+						<a class="btn btn-primary btn-lg" th:href="@{/car/list}" th:text="#{home.more}"></a>
 					</p>
 				</div>
 				<div class="col-md-6 align-content-center">
 					<img th:src="@{/images/Brand.jpg}" class="img-fluid" />
-					<h2>Brands and models avaibles</h2>
-					<p>Get the list of all brand and models avaibles</p>
+					<h2 th:text="#{home.brand.model.avaibles.title}"></h2>
+					<p th:text="#{home.brand.model.avaibles.details}"></p>
 					<p>
-						<a class="btn btn-primary btn-lg" th:href="@{/model/list}">More</a>
+						<a class="btn btn-primary btn-lg" th:href="@{/model/list}" th:text="#{home.more}"></a>
 					</p>
 				</div>
 			</div>

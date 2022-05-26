@@ -58,22 +58,19 @@ public class CarController {
 	}
 
 	@GetMapping(value = "/car/list")
-	public String List(org.springframework.ui.Model model) {
-		model.addAttribute("title", "List cars");
+	public String List(org.springframework.ui.Model model) {		
 		model.addAttribute("cars", carService.getAll());
 		return "car/list";
 	}
 	
 	@GetMapping(value="/car/form")
-	public String add(org.springframework.ui.Model model){
-		model.addAttribute("title","Add new car");
+	public String add(org.springframework.ui.Model model){		
 		model.addAttribute("car",new Car());
 		return "car/form";
 	}
 
 	@GetMapping(value ="/car/form/{id}")
-	public String edit(@PathVariable(value="id")Integer id,org.springframework.ui.Model model) {
-		model.addAttribute("title","Edit car");
+	public String edit(@PathVariable(value="id")Integer id,org.springframework.ui.Model model) {		
 		Car car = null;
 		
 		if (id>0){
@@ -82,8 +79,7 @@ public class CarController {
 			return "redirect:/car/list";
 		}
 		
-		model.addAttribute("car",car);
-		System.out.println("*********************** llego ********************");
+		model.addAttribute("car",car);		
 		return "car/form";
 	}
 	
