@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+<head th:replace="Layout/layout :: head"></head>
+<body>
+	
+	<div class="container">
+
+		<header th:replace="Layout/layout :: siteHeader"></header>
+		<section class="content">
+			<div class="jumbotron">
+				<h1>Home: Add your cars</h1>
+				<p class="lead">Add your cars!, You can have the control about
+					all of them</p>
+				<p>
+					<a class="btn btn-primary btn-lg" th:href="@{/car/form}">newCar</a>
+				</p>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 align-content-center">
+					<img th:src="@{/images/Colection.jpg}" class="img-fluid" />
+					<h2>My cars</h2>
+					<p>Get the list of my collection cars</p>
+					<p>
+						<a class="btn btn-primary btn-lg" th:href="@{/car/list}">More</a>
+					</p>
+				</div>
+				<div class="col-md-6 align-content-center">
+					<img th:src="@{/images/Brand.jpg}" class="img-fluid" />
+					<h2>Brands and models avaibles</h2>
+					<p>Get the list of all brand and models avaibles</p>
+					<p>
+						<a class="btn btn-primary btn-lg" th:href="@{/model/list}">More</a>
+					</p>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="Layout/layout :: siteFooter"></footer>
+
+</body>
+</html>

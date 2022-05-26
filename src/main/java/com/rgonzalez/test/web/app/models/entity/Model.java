@@ -9,13 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
 
+
+
+@Data
 @Entity(name = "models")
 public class Model implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7421633883167661671L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,30 +25,5 @@ public class Model implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="brand_id")
 	private Brand brand;
-	private String descrip;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public String getDescrip() {
-		return descrip;
-	}
-
-	public void setDescrip(String descrip) {
-		this.descrip = descrip;
-	}
-
+	private String descrip;	
 }
