@@ -16,11 +16,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.rgonzalez.test.web.app.editors.BrandPropertyEditor;
 import com.rgonzalez.test.web.app.editors.ModelPropertyEditor;
-import com.rgonzalez.test.web.app.models.entity.Brand;
-import com.rgonzalez.test.web.app.models.entity.Car;
-import com.rgonzalez.test.web.app.models.entity.Model;
+import com.rgonzalez.test.web.app.models.entity.*;
 import com.rgonzalez.test.web.app.models.entity.serializers.ModelSerializer;
-import com.rgonzalez.test.web.app.models.services.IService;
+import com.rgonzalez.test.web.app.models.services.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;   
 
@@ -29,13 +27,13 @@ import com.google.gson.GsonBuilder;
 public class CarController {
 
 	@Autowired
-	private IService<Car> carService;
+	private CarService carService;
 	
 	@Autowired
-	private IService<Brand> brandService;
+	private BrandService brandService;
 	
 	@Autowired
-	private IService<Model> modelService;
+	private ModelService modelService;
 	
 	@Autowired
 	private BrandPropertyEditor brandpropertyeditor;
@@ -85,7 +83,7 @@ public class CarController {
 		}
 		
 		model.addAttribute("car",car);
-		
+		System.out.println("*********************** llego ********************");
 		return "car/form";
 	}
 	

@@ -12,7 +12,8 @@
 	<artifactId>Technical_Test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Technical_Test</name>
-	<description>Prueba de Spring</description>
+	<description>Aplicación de pruebas de java</description>
+	<packaging>war</packaging>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

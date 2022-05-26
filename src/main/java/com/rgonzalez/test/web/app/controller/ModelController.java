@@ -4,18 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.rgonzalez.test.web.app.models.entity.Brand;
-import com.rgonzalez.test.web.app.models.entity.Model;
-import com.rgonzalez.test.web.app.models.services.IService;
+import com.rgonzalez.test.web.app.models.services.*;
 
 @Controller
 public class ModelController {
 
 	@Autowired
-	private IService<Brand> brandService;
+	private BrandService brandService;
 	
 	@Autowired
-	private IService<Model> modelService;
+	private ModelService modelService;
 	
 	@GetMapping(value="model/list")
 	public String list(org.springframework.ui.Model model)

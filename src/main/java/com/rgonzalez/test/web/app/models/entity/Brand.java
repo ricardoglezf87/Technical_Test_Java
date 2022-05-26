@@ -27,5 +27,10 @@ public class Brand implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "brand")
 	private List<Model> models;
+	
+	@Override
+    public String toString() {
+        return "Brand [id=" + id + ", Descrip=" + descrip + "]";
+    }
 
 }

@@ -41,7 +41,7 @@
 				<div class="form-group">
 					<label for="price">Price</label> <input type="number"
 						th:field="*{price}" class="form-control numeric"
-						, placeholder="Write the price, be careful with comma and dot for decimal, depend of system" />
+						, placeholder="Write the price without decimals" />
 				</div>
 
 				<input th:if="*{id}" type="submit" class="btn btn-primary" value="Modify" />

@@ -27,4 +27,9 @@ public class Model implements Serializable {
 	private Brand brand;
 		
 	private String descrip;	
+	
+	@Override
+    public String toString() {
+        return "Model [id=" + id + ", Brand=" + brand.toString() + ", Descrip=" + descrip + "]";
+    }
 }

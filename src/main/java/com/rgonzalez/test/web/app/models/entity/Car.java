@@ -26,6 +26,11 @@ public class Car implements Serializable {
 	@JoinColumn(name="model_id")
 	private Model model;
 	private String numberplate;
-	private Double Price;
+	private Double price;
+	
+	@Override
+    public String toString() {        
+		return "Car [id=" + id + ", Model=" + model.toString() + ", NumberPlate=" + numberplate + ", Price=" + price + "]";
+    }
 
 }
