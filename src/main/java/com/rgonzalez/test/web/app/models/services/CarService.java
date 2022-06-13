@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.rgonzalez.test.web.app.models.entity.Car;
 
+import reactor.core.publisher.Flux;
+
 public interface CarService {
 	
-	public List<Car> getAll();
+	public Flux<Car> getAll();
 	public Car getbyId(Integer id);
 	public void save(Car obj);
 	public void delete(Car obj);

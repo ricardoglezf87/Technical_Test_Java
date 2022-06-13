@@ -1,11 +1,14 @@
 package com.rgonzalez.test.web.app.models.services;
 
+import java.time.Duration;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rgonzalez.test.web.app.models.dao.BrandDao;
 import com.rgonzalez.test.web.app.models.entity.Brand;
+
+import reactor.core.publisher.Flux;
 
 @Service
 public class BrandServiceImpl implements BrandService{
@@ -14,8 +17,8 @@ public class BrandServiceImpl implements BrandService{
 	private BrandDao brandRepository;
 	
 	@Override
-	public List<Brand> getAll() {		
-		return  (List<Brand>) brandRepository.findAll();
+	public Flux<Brand> getAll() {		
+		return  Flux.fromIterable(brandRepository.findAll());
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.rgonzalez.test.web.app.models.dao.CarDao;
 import com.rgonzalez.test.web.app.models.entity.Car;
 
+import reactor.core.publisher.Flux;
+
 @Service
 public class CarServiceImpl implements CarService{
 
@@ -14,8 +16,8 @@ public class CarServiceImpl implements CarService{
 	private CarDao carRepository;
 	
 	@Override
-	public List<Car> getAll() {		
-		return (List<Car>) carRepository.findAll();
+	public Flux<Car> getAll() {		
+		return Flux.fromIterable(carRepository.findAll());
 	}
 
 	@Override

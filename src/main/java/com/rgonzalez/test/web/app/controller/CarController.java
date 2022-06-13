@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.thymeleaf.spring5.context.webflux.IReactiveDataDriverContextVariable;
+import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 
 import com.rgonzalez.test.web.app.editors.BrandPropertyEditor;
 import com.rgonzalez.test.web.app.editors.ModelPropertyEditor;
 import com.rgonzalez.test.web.app.models.entity.*;
 import com.rgonzalez.test.web.app.models.entity.serializers.ModelSerializer;
 import com.rgonzalez.test.web.app.models.services.*;
+
+import reactor.core.publisher.Flux;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;   
 
@@ -48,18 +53,23 @@ public class CarController {
 	}
 
 	@ModelAttribute("models")
-	public List<Model> models(){
-		return modelService.getAll();
+	public Flux<Model> models(){
+		return modelService.getAll();		
 	}
 	
 	@ModelAttribute("brands")
-	public List<Brand> brands(){
-		return brandService.getAll();
+	public Flux<Brand> brands(){
+		return brandService.getAll();		
 	}
 
 	@GetMapping(value = "/car/list")
-	public String List(org.springframework.ui.Model model) {		
-		model.addAttribute("cars", carService.getAll());
+	public String List(org.springframework.ui.Model model) {
+		
+		IReactiveDataDriverContextVariable carDataDrivenMode =
+                new ReactiveDataDriverContextVariable(carService.getAll(), 1);
+		
+		model.addAttribute("cars",carDataDrivenMode);
+		
 		return "car/list";
 	}
 	

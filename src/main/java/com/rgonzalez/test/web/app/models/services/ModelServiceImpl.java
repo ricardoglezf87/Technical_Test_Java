@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.rgonzalez.test.web.app.models.dao.ModelDao;
 import com.rgonzalez.test.web.app.models.entity.Model;
 
+import reactor.core.publisher.Flux;
+
 @Service
 public class ModelServiceImpl implements ModelService{
 
@@ -14,10 +16,9 @@ public class ModelServiceImpl implements ModelService{
 	private ModelDao modelRepository;
 	
 	@Override
-	public List<Model> getAll() {		
-		return (List<Model>) modelRepository.findAll();
+	public Flux<Model> getAll() {		
+		return Flux.fromIterable(modelRepository.findAll());
 	}
-
 	@Override
 	public Model getbyId(Integer id) {			
 		return modelRepository.findById(id).orElse(null);
